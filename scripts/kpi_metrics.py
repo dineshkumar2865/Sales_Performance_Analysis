@@ -16,9 +16,8 @@ avg_discount = df["Discount"].mean()
 profit_margin = (total_profit / total_sales) * 100
 avg_order_value = df.groupby("Order ID")["Sales"].sum().mean()
 
-# -----------------------------
 # Top States & Products
-# -----------------------------
+
 top_states = (
     df.groupby("State")["Sales"]
     .sum()
@@ -35,9 +34,8 @@ top_products = (
     .reset_index()
 )
 
-# -----------------------------
 # Prepare KPI summary (flat data)
-# -----------------------------
+
 kpi_summary = {
     "Total Sales": [round(total_sales, 2)],
     "Total Profit": [round(total_profit, 2)],
@@ -47,10 +45,9 @@ kpi_summary = {
     "Average Order Value": [round(avg_order_value, 2)],
 }
 
-# -----------------------------
 # Save outputs as CSV files
-# -----------------------------
+
 kpi_df = pd.DataFrame(kpi_summary)
 kpi_df.to_csv(os.path.join(Output_folder, "kpi_summary.csv"), index=False)
-print("💾 Files saved successfully:")
+print(" Files saved successfully:")
 print(" - kpi_summary.csv")

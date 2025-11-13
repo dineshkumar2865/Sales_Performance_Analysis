@@ -18,47 +18,40 @@ monthly_sales = (
 # Prophet requires columns named 'ds' (date) and 'y' (value)
 monthly_sales.rename(columns={'Order Date': 'ds', 'Sales': 'y'}, inplace=True)
 
-print("📅 Monthly sales data prepared:")
+print("Monthly sales data prepared:")
 print(monthly_sales.head())
 
-# ---------------------
 # Create and fit the Prophet model
-# ---------------------
+
 model = Prophet()
 model.fit(monthly_sales)
 
-# ---------------------
 # Make future predictions (next 6 months)
-# ---------------------
+
 future = model.make_future_dataframe(periods=6, freq='M')
 forecast = model.predict(future)
 
-# ---------------------
 # Plot the forecast
-# ---------------------
+
 fig1 = model.plot(forecast)
 plt.title("📈 Sales Forecast (Next 6 Months)")
 plt.xlabel("Date")
 plt.ylabel("Total Sales")
 plt.show()
 
-# Optional: Plot the trend and seasonality components
 fig2 = model.plot_components(forecast)
 plt.show()
 
-# ---------------------
 # Save forecast results WITH PROPER ENCODING
-# ---------------------
+
 forecast_output_path = r"C:\Users\MCW\Desktop\dinesh\dinesh\sales_performance_dashboard\output\sales_forecast.csv"
 
-# Save with UTF-8 encoding to prevent character issues
 forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].to_csv(forecast_output_path, index=False, encoding='utf-8')
 
-print("✅ Forecast saved successfully with UTF-8 encoding!")
+print("Forecast saved successfully with UTF-8 encoding!")
 
-# ---------------------
 # Display key predictions
-# ---------------------
+
 predictions = forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail(10)
-print("\n📊 Latest forecasted values:")
+print("\n Latest forecasted values:")
 print(predictions)

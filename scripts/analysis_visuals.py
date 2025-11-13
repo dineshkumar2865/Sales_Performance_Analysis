@@ -4,9 +4,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
-# ======================
-# 1️⃣ Load the cleaned dataset
-# ======================
+# 1 Load the cleaned dataset
+
 INPUT_FILE = r"C:\Users\MCW\Desktop\dinesh\dinesh\sales_performance_dashboard\output\sales_clean.csv"
 OUTPUT_DIR = r"C:\Users\MCW\Desktop\dinesh\dinesh\sales_performance_dashboard\output\visuals"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -20,9 +19,9 @@ except FileNotFoundError:
     print("❌ ERROR: sales_clean.csv not found. Please run Step 2 first.")
     exit()
 
-# ======================
-# 2️⃣ Monthly Sales Trend
-# ======================
+
+# 2 Monthly Sales Trend
+
 df["Month"] = df["Order Date"].dt.to_period("M")
 monthly_sales = df.groupby("Month")["Sales"].sum()
 
@@ -36,9 +35,8 @@ plt.tight_layout()
 plt.savefig(f"{OUTPUT_DIR}/monthly_sales_trend.png")
 plt.close()
 
-# ======================
-# 3️⃣ Sales by Category
-# ======================
+# 3 Sales by Category
+
 category_sales = df.groupby("Category")["Sales"].sum().sort_values()
 
 plt.figure(figsize=(8, 5))
@@ -50,9 +48,8 @@ plt.tight_layout()
 plt.savefig(f"{OUTPUT_DIR}/sales_by_category.png")
 plt.close()
 
-# ======================
-# 4️⃣ Top 10 Products by Profit
-# ======================
+# 4 Top 10 Products by Profit
+
 top_products = (
     df.groupby("Product Name")["Profit"]
     .sum()
@@ -69,9 +66,8 @@ plt.tight_layout()
 plt.savefig(f"{OUTPUT_DIR}/top10_products_profit.png")
 plt.close()
 
-# ======================
-# 5️⃣ Sales by Region
-# ======================
+# 5 Sales by Region
+
 region_sales = df.groupby("Region")["Sales"].sum()
 
 plt.figure(figsize=(7, 5))
@@ -83,9 +79,8 @@ plt.tight_layout()
 plt.savefig(f"{OUTPUT_DIR}/sales_by_region.png")
 plt.close()
 
-# ======================
-# 6️⃣ Profit vs Discount
-# ======================
+# 6 Profit vs Discount
+
 plt.figure(figsize=(8, 5))
 plt.scatter(df["Discount"], df["Profit"], alpha=0.5, color="orange")
 plt.title("Profit vs Discount", fontsize=14)
@@ -96,8 +91,7 @@ plt.tight_layout()
 plt.savefig(f"{OUTPUT_DIR}/profit_vs_discount.png")
 plt.close()
 
-# ======================
-# 7️⃣ Completion Message
-# ======================
+# 7 Completion Message
+
 print("📊 All visuals created successfully!")
 print("✅ Step 4 complete — Charts saved to:", OUTPUT_DIR)

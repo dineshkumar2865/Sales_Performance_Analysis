@@ -10,13 +10,12 @@ INPUT_FILE = r"C:\Users\MCW\Desktop\dinesh\dinesh\sales_performance_dashboard\ou
 OUTPUT_DIR = r"C:\Users\MCW\Desktop\dinesh\dinesh\sales_performance_dashboard\output\visuals"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-print("🔹 STEP 4: Visual & Trend Analysis started")
 
 try:
     df = pd.read_csv(INPUT_FILE, parse_dates=["Order Date", "Ship Date"])
-    print(f"✅ Loaded cleaned dataset successfully — Rows: {len(df)}")
+    print(f"Loaded cleaned dataset successfully — Rows: {len(df)}")
 except FileNotFoundError:
-    print("❌ ERROR: sales_clean.csv not found. Please run Step 2 first.")
+    print("ERROR: sales_clean.csv not found. Please run Step 2 first.")
     exit()
 
 
@@ -93,5 +92,5 @@ plt.close()
 
 # 7 Completion Message
 
-print("📊 All visuals created successfully!")
-print("✅ Step 4 complete — Charts saved to:", OUTPUT_DIR)
+print("All visuals created successfully!")
+print("Step 4 complete — Charts saved to:", OUTPUT_DIR)
